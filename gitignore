@@ -1,0 +1,37 @@
+# Python-related ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+
+# Django-related ignores
+db.sqlite3
+media/
+*.log
+
+# Ignore Static and Compiled Files
+staticfiles/    # Static files collected using `collectstatic`
+static/         # Ignore static files if generated dynamically
+*.DS_Store      # macOS system files
+
+# Environment Variables (Security)
+.env            # Your secret environment variables
+*.env           # Any other environment files
+
+# Node Modules (if using React frontend)
+node_modules/
+package-lock.json
+yarn.lock
+
+# VSCode and JetBrains settings
+.vscode/
+.idea/
+
+# Ignore Migrations if needed (optional)
+**/migrations/*.pyc
+**/migrations/*.py
+!**/migrations/__init__.py
