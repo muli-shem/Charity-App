@@ -25,6 +25,7 @@ def home(request):
 urlpatterns = [
   # Root URL now returns a JSON response
     path('admin/', admin.site.urls),
-    path('api/', include('donations.urls','payments.urls' )),  # Ensure all API routes are included
+    path('api/', include('donations.urls' )),
+    path('api/', include('payments.urls' )),  # Ensure all API routes are included
 ]
 
