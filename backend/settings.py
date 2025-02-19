@@ -77,11 +77,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
-
+import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'payments' 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -166,3 +166,6 @@ DARAJA_SHORTCODE = os.getenv('DARAJA_SHORTCODE')
 DARAJA_PASSKEY = os.getenv('DARAJA_PASSKEY')
 DARAJA_CALLBACK_URL = os.getenv('DARAJA_CALLBACK_URL')
 
+# Stripe API settings
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
