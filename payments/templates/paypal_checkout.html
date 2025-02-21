@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Checkout</title>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}"></script>
+</head>
+<body>
+    <h1>PayPal Checkout</h1>
+    <div id="paypal-button-container"></div>
+
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return fetch("/api/paypal/create-order/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(data) {
+                    return data.order_id;
+                });
+            },
+            onApprove: function(data, actions) {
+                return fetch("/api/paypal/capture-order/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        payment_id: data.orderID,
+                    }),
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(details) {
+                    alert("Payment succeeded!");
+                    console.log(details);
+                });
+            },
+            onError: function(err) {
+                alert("Payment failed. Please try again.");
+                console.error(err);
+            },
+        }).render("#paypal-button-container");
+    </script>
+</body>
+</html>
